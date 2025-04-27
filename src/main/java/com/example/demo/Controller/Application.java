@@ -106,6 +106,12 @@ public class Application {
                 transaction.getReceiverAccount()
         );
     }
+    
+    
+    @PostMapping("/passbook")
+    public List<Passbook> passbook(@RequestBody Passbook hist) {
+        return customerservice.history(hist.getSenderAccount());
+    }
 
     @PostMapping("/upi")
     public upiprofile createUpiProfile(@RequestBody upiprofile upi) {
@@ -138,7 +144,12 @@ public class Application {
 
     @PostMapping("/mainprofile")
     public MainLoginDto createMainProfile(@RequestBody MainLoginDto main) {
+        if (main.getAccountNo() == null || main.getAccountNo().isEmpty()) {
+            throw new ResourceNotFoundException("Account number is required.");
+        }
+
         return customerservice.createProfile(main.getName(), main.getAccountNo())
                 .orElseThrow(() -> new ResourceNotFoundException("Main profile creation failed for: " + main.getAccountNo()));
     }
+
 }

@@ -6,7 +6,7 @@ public class MainLoginDto {
     
     private String name;
     private String accountNo;
-    private String mobilenumber;
+//    private String mobilenumber;
 
     private List<CreditCard> creditCards;
     private List<DebitCard> debitCards;
@@ -78,13 +78,7 @@ public class MainLoginDto {
         this.upi = upi;
     }
 
-	public String getMobilenumber() {
-		return mobilenumber;
-	}
 
-	public void setMobilenumber(String mobilenumber) {
-		this.mobilenumber = mobilenumber;
-	}
 
     
 }

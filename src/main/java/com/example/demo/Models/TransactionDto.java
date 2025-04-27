@@ -5,7 +5,6 @@ public class TransactionDto {
     private String senderAccount;
     private String receiverAccount;
     private double amount;
-
     public TransactionDto() {
     }
 
@@ -38,7 +37,7 @@ public class TransactionDto {
         this.amount = amount;
     }
 
-    // Optional: toString method for easy debugging/logging
+    
     @Override
     public String toString() {
         return "TransactionRequest{" +

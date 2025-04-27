@@ -58,19 +58,30 @@ public class upiservice {
 
 	//important
 	public String upiLogin(MainLoginDto loginRequest) {
-	    upiprofile upi = upirepo.findByAccountNo(loginRequest.getAccountNo());
-	    if (upi == null) {
+	    Customer customer = customerrepo.findByAccountNo(loginRequest.getAccountNo());
+
+	    if (customer != null) {
+	        System.out.println("Found upi profile: " + customer);
+	        System.out.println("Login request accountNo: " + loginRequest.getAccountNo());
+//	        System.out.println("Login request mobilenumber: " + loginRequest.getMobilenumber());
+	    } else {
+	        System.out.println("No profile found for accountNo: " + loginRequest.getAccountNo());
+	    }
+
+	    if (customer == null) {
 	        return "Invalid Credentials";
 	    }
-	    boolean accountMatches = loginRequest.getAccountNo().equals(upi.getAccountNo());
-	    boolean mobileMatches  = loginRequest.getMobilenumber().equals(upi.getMobilenumber());
 
-	    if (accountMatches && mobileMatches) {
+	    boolean accountMatches = loginRequest.getAccountNo().equals(customer.getAccountNo());
+	    //boolean mobileMatches  = loginRequest.getMobilenumber().equals(customer.getMobileNo());
+
+	    if (accountMatches) {
 	        return "Successful";
 	    } else {
 	        return "Invalid Credentials";
 	    }
 	}
+
 
 
 
